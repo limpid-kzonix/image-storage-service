@@ -1,0 +1,25 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="mongoUnit">
+        <provider>com.impetus.kundera.KunderaPersistence</provider>
+        <class>com.discoperi.model.mongo.entities.Employee</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="kundera.nodes" value="localhost"/>
+            <property name="kundera.port" value="27017"/>
+            <property name="kundera.keyspace" value="play-db"/>
+            <property name="kundera.dialect" value="mongodb"/>
+            <property name="kundera.ddl.auto.prepare" value="update" />
+            <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
+            <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
+            <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
+        </properties>
+    </persistence-unit>
+
+    <!--Persistence Unit for Testing-->
+
+
+</persistence>
