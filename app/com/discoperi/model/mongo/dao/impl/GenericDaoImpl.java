@@ -12,39 +12,42 @@ import java.util.List;
 /**
  * Created by Harmeet Singh(Taara) on 27/12/16.
  */
-public abstract class GenericDaoImpl<T> implements GenericDao<T> {
+public abstract class GenericDaoImpl< T > implements GenericDao< T > {
 
-    private Class<T> entityClass;
-    private EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory( "mongoUnit" );
-    private EntityManager entityManager;
+	private Class< T > entityClass;
+
+	private EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory( "mongoUnit" );
+
+	private EntityManager entityManager;
 
 
-    public GenericDaoImpl() {
-        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory( "mongoUnit" );
-        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
-        entityClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
-    }
+	public GenericDaoImpl( ) {
+		EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory( "mongoUnit" );
+		ParameterizedType parameterizedType = ( ParameterizedType ) getClass( ).getGenericSuperclass( );
+		entityClass = ( Class< T > ) parameterizedType.getActualTypeArguments( )[ 0 ];
+	}
 
-    protected EntityManager getEntityManager() {
-        return this.managerFactory.createEntityManager();
-    }
+	protected EntityManager getEntityManager( ) {
+		return this.managerFactory.createEntityManager( );
+	}
 
-    @Override
-    public void save(T t) {
-        getEntityManager().persist(t);
-    }
+	@Override
+	public void save( T t ) {
+		getEntityManager( ).persist( t );
+	}
 
-    @Override
-    public T findById(int id) {
-        return getEntityManager().createQuery("SELECT em FROM "+entityClass.getSimpleName()+" em WHERE em.id = :id", entityClass)
-                .setParameter("id", id).getSingleResult();
-    }
+	@Override
+	public T findById( int id ) {
+		return getEntityManager( )
+				.createQuery( "SELECT em FROM " + entityClass.getSimpleName( ) + " em WHERE em.id = :id", entityClass )
+				.setParameter( "id", id ).getSingleResult( );
+	}
 
-    @Override
-    public List<T> findAll() {
-        return getEntityManager().createQuery("SELECT em FROM Employee em", entityClass)
-                .getResultList();
-    }
+	@Override
+	public List< T > findAll( ) {
+		return getEntityManager( ).createQuery( "SELECT em FROM Employee em", entityClass )
+				.getResultList( );
+	}
 
 
 }

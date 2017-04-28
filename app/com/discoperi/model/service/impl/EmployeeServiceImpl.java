@@ -14,24 +14,24 @@ import java.util.List;
 @Singleton
 public class EmployeeServiceImpl implements EmployeeService {
 
-  private EmployeeDao employeeDao;
+	private EmployeeDao employeeDao;
 
-  @Inject
-  public EmployeeServiceImpl(EmployeeDao employeeDao) {
-    this.employeeDao = employeeDao;
-  }
+	@Inject
+	public EmployeeServiceImpl( EmployeeDao employeeDao ) {
+		this.employeeDao = employeeDao;
+	}
 
-  @Override public void saveNewEmployee(Employee employee) {
-    employeeDao.save(employee);
-  }
+	@Override public void saveNewEmployee( Employee employee ) {
+		employeeDao.save( employee );
+	}
 
-  @Override public Employee findEmployeeById(int id) {
-    return employeeDao.findById(id);
-  }
+	@Override public Employee findEmployeeById( int id ) {
+		return employeeDao.findById( id );
+	}
 
-  @Override public List<Employee> findAllEmployees() {
-    return employeeDao.findAll();
-  }
+	@Override public List< Employee > findAllEmployees( ) {
+		return employeeDao.findAll( );
+	}
 
 
 }

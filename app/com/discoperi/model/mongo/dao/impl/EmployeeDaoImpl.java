@@ -10,10 +10,10 @@ import javax.inject.Singleton;
  * Created by Harmeet Singh(Taara) on 27/12/16.
  */
 @Singleton
-public class EmployeeDaoImpl extends GenericDaoImpl<Employee> implements EmployeeDao {
+public class EmployeeDaoImpl extends GenericDaoImpl< Employee > implements EmployeeDao {
 
-    @Inject
-    public EmployeeDaoImpl( ) {
-        super();
-    }
+	@Inject
+	public EmployeeDaoImpl( ) {
+		super( );
+	}
 }

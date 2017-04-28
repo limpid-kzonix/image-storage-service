@@ -10,10 +10,12 @@ import java.util.List;
  */
 public interface EmployeeService {
 
-  @Transactional
-  void saveNewEmployee(Employee employee);
-  @Transactional
-  Employee findEmployeeById(int id);
-  @Transactional
-  List<Employee> findAllEmployees();
+	@Transactional
+	void saveNewEmployee( Employee employee );
+
+	@Transactional
+	Employee findEmployeeById( int id );
+
+	@Transactional
+	List< Employee > findAllEmployees( );
 }

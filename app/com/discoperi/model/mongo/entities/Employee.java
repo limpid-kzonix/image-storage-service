@@ -12,15 +12,19 @@ import static javax.persistence.GenerationType.AUTO;
  */
 @Data
 @Entity
-@Table(name = "employee", schema = "play-db@mongoUnit")
+@Table( name = "employee", schema = "play-db@mongoUnit" )
 public class Employee {
-  @Id @GeneratedValue(strategy = AUTO)
-  @Column(name = "id")
-  private ObjectId id;
-  @Column(name = "name")
-  private String name;
-  @Column(name = "age")
-  private Integer age;
-  @Column(name = "sex")
-  private String sex;
+
+	@Id @GeneratedValue( strategy = AUTO )
+	@Column( name = "id" )
+	private ObjectId id;
+
+	@Column( name = "name" )
+	private String name;
+
+	@Column( name = "age" )
+	private Integer age;
+
+	@Column( name = "sex" )
+	private String sex;
 }
