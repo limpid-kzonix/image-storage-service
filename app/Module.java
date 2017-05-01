@@ -1,14 +1,15 @@
-import com.discoperi.model.mongo.dao.EmployeeDao;
-import com.discoperi.model.mongo.dao.impl.EmployeeDaoImpl;
-import com.discoperi.model.service.EmployeeService;
-import com.discoperi.model.service.impl.EmployeeServiceImpl;
+import com.omnie.model.KunderaEntityManageFactory;
+import com.omnie.model.mongo.dao.ImageStorageDao;
+import com.omnie.model.mongo.dao.impl.ImageStorageDaoimpl;
+import com.omnie.model.service.ImageStorageService;
+import com.omnie.model.service.impl.ImageStorageServiceImpl;
 import com.google.inject.AbstractModule;
 
 /**
  * This class is a Guice module that tells Guice how to bind several
  * different types. This Guice module is created when the Play
  * application starts.
- *
+ * <p>
  * Play will automatically use any class called `Module` that is in
  * the root package. You can create modules in other locations by
  * adding `play.modules.enabled` settings to the `application.conf`
@@ -16,10 +17,11 @@ import com.google.inject.AbstractModule;
  */
 public class Module extends AbstractModule {
 
-    @Override
-    public void configure() {
-        bind(EmployeeService.class ).to( EmployeeServiceImpl.class );
-        bind(EmployeeDao.class ).to( EmployeeDaoImpl.class );
-    }
+	@Override
+	public void configure( ) {
+		bind( ImageStorageService.class ).to( ImageStorageServiceImpl.class );
+		bind( ImageStorageDao.class ).to( ImageStorageDaoimpl.class );
+		bind( KunderaEntityManageFactory.class ).asEagerSingleton( );
+	}
 
 }

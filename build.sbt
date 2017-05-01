@@ -1,6 +1,6 @@
 import play.sbt.PlayJava
 
-name := """KunderaDataBaseCloud"""
+name := """Omnie ImageService"""
 
 version := "1.0-SNAPSHOT"
 
@@ -21,4 +21,3 @@ libraryDependencies ++= Seq(
 
 fork in run := true
 
-javaOptions in Test += "-Dconfig.file=conf/application.test.conf"

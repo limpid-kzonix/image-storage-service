@@ -1,0 +1,2 @@
+2017-05-01 18:19:49,992 [ERROR] from com.impetus.kundera.configure.MetamodelConfiguration in ForkJoinPool-1-worker-1 - Class com.discoperi.model.mongo.entities.Employee not found, it won't be loaded as entity
+2017-05-01 18:19:50,713 [INFO] from play.api.Play in ForkJoinPool-1-worker-1 - Application started (Dev)

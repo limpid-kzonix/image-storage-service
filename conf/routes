@@ -2,7 +2,8 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                           com.discoperi.controllers.ImageController.index
+POST        /omnie/api/image/v1/upload/                  com.omnie.controllers.ImageController.uploadImage
+GET         /omnie/api/image/v1/retriew/:objectId        com.omnie.controllers.ImageController.getImageSource(objectId:String)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
