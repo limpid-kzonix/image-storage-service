@@ -1,2 +1,5 @@
-This is your new Play application with Java, JPA and Hibernate
-==============================================================
+
+#Image Service
+
+This is  PlayFramework application with Java, JPA and Kundera (NoSQL JPA), CacheAPI
+===================================================================================
