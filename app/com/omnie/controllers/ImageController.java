@@ -51,7 +51,8 @@ public class ImageController extends Controller {
 
 	public Result getImageSource( String objectId, String imageType )
 			throws IOException, ExecutionException, InterruptedException {
-
-		return ok( imageStorageService.getTypedImageById( objectId, imageType ) );
+		String _objectId = objectId;
+		String _type = imageType;
+		return ok( imageStorageService.getTypedImageById( _objectId, _type ) );
 	}
 }

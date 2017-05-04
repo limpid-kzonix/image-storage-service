@@ -4,9 +4,9 @@ package com.omnie.model.service.utils;
  * Created by limpid on 5/3/17.
  */
 public enum ImageExtension {
-	JPG("jpg"),
-	PNG("png"),
-	GIF("gif");
+	JPG(".jpg"),
+	PNG(".png"),
+	GIF(".gif");
 
 	private String type;
 
