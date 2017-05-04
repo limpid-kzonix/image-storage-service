@@ -239,7 +239,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 			imageSource.setExtension( ImageExtension.JPG.getType( ) );
 			imageSource.setHeight( image.getHeight( ) );
 			imageSource.setWidth( image.getWidth( ) );
-			imageSource.setType( ImageSourceType.SMALL.getType( ) );
+			imageSource.setType( ImageSourceType.MEDIUM.getType( ) );
 			try {
 				imageSource
 						.setImageSource( generateImageSource( resizeImageWithHint( image, 500, 500 ).get( ) ).get( ) );
@@ -260,7 +260,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 			imageSource.setExtension( ImageExtension.JPG.getType( ) );
 			imageSource.setHeight( image.getHeight( ) );
 			imageSource.setWidth( image.getWidth( ) );
-			imageSource.setType( ImageSourceType.SMALL.getType( ) );
+			imageSource.setType( ImageSourceType.ORIGINAL.getType( ) );
 			try {
 				imageSource.setImageSource( generateImageSource( image ).get( ) );
 			} catch ( InterruptedException | ExecutionException e ) {
