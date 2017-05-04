@@ -96,7 +96,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 		CompletableFuture<File> filePromise = CompletableFuture.supplyAsync( () -> {
 			File file = null;
 			try {
-				file = File.createTempFile( UUID.randomUUID().toString(), ImageExtension.JPG.getType() );
+				file = File.createTempFile( UUID.randomUUID().toString(),"." + ImageExtension.JPG.getType() );
 				InputStream in = new ByteArrayInputStream( bytePromise.get() );
 				BufferedImage imageFromSource = ImageIO.read( in );
 
