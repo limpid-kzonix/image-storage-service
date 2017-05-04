@@ -24,19 +24,62 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
 
 	@Inject
 	public ErrorHandler( Configuration configuration, Environment environment,
-	                     OptionalSourceMapper sourceMapper, Provider<Router > routes ) {
-		super(configuration, environment, sourceMapper, routes);
+	                     OptionalSourceMapper sourceMapper, Provider< Router > routes ) {
+		super( configuration, environment, sourceMapper, routes );
 	}
 
-	protected CompletionStage<Result > onProdServerError( Http.RequestHeader request, UsefulException exception ) {
+	protected CompletionStage< Result > onProdServerError( Http.RequestHeader request, UsefulException exception ) {
 		return CompletableFuture.completedFuture(
 				Results.internalServerError( "A server error occurred: " + exception.getMessage( ) )
 		                                        );
 	}
 
-	protected CompletionStage<Result> onForbidden( Http.RequestHeader request, String message ) {
+	protected CompletionStage< Result > onForbidden( Http.RequestHeader request, String message ) {
 		return CompletableFuture.completedFuture(
-				Results.forbidden("You're not allowed to access this resource.")
+				Results.forbidden( "You're not allowed to access this resource." )
+		                                        );
+	}
+
+	@Override
+	public CompletionStage< Result > onClientError( Http.RequestHeader request, int statusCode, String message ) {
+		return CompletableFuture.completedFuture(
+				Results.internalServerError( "A server error occurred: " + message )
+		                                        );
+	}
+
+	@Override protected CompletionStage< Result > onBadRequest( Http.RequestHeader request, String message ) {
+		return CompletableFuture.completedFuture(
+				Results.internalServerError( "A server error occurred: " + message )
+		                                        );
+	}
+
+	@Override protected CompletionStage< Result > onNotFound( Http.RequestHeader request, String message ) {
+		return CompletableFuture.completedFuture(
+				Results.internalServerError( "A server error occurred: " + message )
+		                                        );
+	}
+
+	@Override protected CompletionStage< Result > onOtherClientError( Http.RequestHeader request, int statusCode,
+	                                                                  String message ) {
+		return CompletableFuture.completedFuture(
+				Results.internalServerError( "A server error occurred: " + message )
+		                                        );
+	}
+
+	@Override public CompletionStage< Result > onServerError( Http.RequestHeader request, Throwable exception ) {
+		return CompletableFuture.completedFuture(
+				Results.internalServerError( "A server error occurred: " + exception.getMessage( ) )
+		                                        );
+	}
+
+	@Override protected void logServerError( Http.RequestHeader request, UsefulException usefulException ) {
+		super.logServerError( request, usefulException );
+	}
+
+	@Override
+	protected CompletionStage< Result > onDevServerError( Http.RequestHeader request, UsefulException exception ) {
+		return CompletableFuture.completedFuture(
+				Results.internalServerError( "A server error occurred: " + exception.getMessage( ) )
 		                                        );
 	}
 }

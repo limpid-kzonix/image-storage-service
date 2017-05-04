@@ -60,10 +60,10 @@ public class ImageController extends Controller {
 		String _objectId = objectId;
 		String _type = imageType;
 
-		File image = cache.getOrElse( objectId+_type, () -> {
+		File image = cache.getOrElse( objectId + _type, () -> {
 
 			File imageT = imageStorageService.getTypedImageById( _objectId, _type );
-			cache.set( objectId+_type, imageT );
+			cache.set( objectId+ _type , imageT );
 			return imageT;
 		} );
 
