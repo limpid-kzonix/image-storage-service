@@ -2,18 +2,14 @@ package com.omnie.controllers;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.omnie.model.mongo.entities.Image;
 import com.omnie.model.service.ImageStorageService;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -37,10 +33,8 @@ public class ImageController extends Controller {
 		if ( picture != null ) {
 
 			try {
-				return ok( imageStorageService.prepareAndSave( picture ) );
-			} catch ( ExecutionException e ) {
-				e.printStackTrace( );
-			} catch ( InterruptedException e ) {
+				return ok( Json.toJson( imageStorageService.prepareAndSave( picture ) ) );
+			} catch ( ExecutionException | InterruptedException e ) {
 				e.printStackTrace( );
 			}
 			return ok( "jpeg" );
@@ -54,15 +48,9 @@ public class ImageController extends Controller {
 		return ok( );
 	}
 
-	public Result getImageSource( String objectId ) throws IOException {
-		Image image = imageStorageService.findImageById( objectId );
+	public Result getImageSource( String objectId, String imageType )
+			throws IOException, ExecutionException, InterruptedException {
 
-		byte[] imageByteArray = image.getImageSources( ).get( 0 ).getOrginalImageSource( );
-		;
-		InputStream in = new ByteArrayInputStream( imageByteArray );
-		BufferedImage bImageFromConvert = ImageIO.read( in );
-		File file = File.createTempFile( "logo", ".png" );
-		ImageIO.write( bImageFromConvert, "png", file );
-		return ok( file );
+		return ok( imageStorageService.getTypedImageById( objectId, imageType ) );
 	}
 }

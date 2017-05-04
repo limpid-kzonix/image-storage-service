@@ -9,7 +9,7 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava, DebianPlugin)
 scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
-
+  filters,
   javaCore,
   "com.impetus.kundera.client" % "kundera-mongo" % "3.8",
   "com.google.code.gson" % "gson" % "2.8.0",

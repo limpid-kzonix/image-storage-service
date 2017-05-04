@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-bin/./omnie-imageservice -J-Xms1280M -J-Xmx2120m -J-server -Dconfig.file=conf/application.conf
+target/universal/stage/bin/./omnie-imageservice -J-Xms1280M -J-Xmx2120m -J-server -Dconfig.file=target/universal/stage/conf/application.conf

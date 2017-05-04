@@ -7,7 +7,7 @@ import java.util.List;
  */
 public interface GenericDao< E > {
 
-	void save( E entity );
+	E save( E entity );
 
 	void update( E entity );
 

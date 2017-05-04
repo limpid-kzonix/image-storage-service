@@ -25,13 +25,14 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 		entityClass = ( Class< E > ) parameterizedType.getActualTypeArguments( )[ 0 ];
 	}
 
-	protected EntityManager getEntityManager( ) {
+	private EntityManager getEntityManager( ) {
 		return this.entityManageFactory.getManagerFactory( ).createEntityManager( );
 	}
 
 	@Override
-	public void save( E t ) {
-		getEntityManager( ).persist( t );
+	public E save( E entity ) {
+		getEntityManager( ).persist( entity );
+		return entity;
 	}
 
 

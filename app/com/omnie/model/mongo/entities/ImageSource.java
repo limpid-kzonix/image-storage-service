@@ -14,16 +14,14 @@ import java.io.Serializable;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table()
+@Table( name = "image_sources", schema = "play-db@mongoUnit" )
 public class ImageSource implements Serializable {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO )
-	@Column( name = "image_id" )
+	@Column( name = "source_id" )
 	private String imageId;
 
-	@Column( name = "image_name" )
-	private String imageName;
 
 	@Column( name = "width" )
 	private int width;
@@ -38,8 +36,8 @@ public class ImageSource implements Serializable {
 	private String extension;
 
 	@Lob
-	@Column( name = "picture_orginal" )
-	private byte[] orginalImageSource;
+	@Column( name = "source" )
+	private byte[] imageSource;
 
 
 
