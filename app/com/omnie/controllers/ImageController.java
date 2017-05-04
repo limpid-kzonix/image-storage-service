@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.omnie.model.service.ImageStorageService;
 import play.cache.CacheApi;
-import play.cache.NamedCache;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -26,7 +25,7 @@ public class ImageController extends Controller {
 	private ImageStorageService imageStorageService;
 
 	@Inject
-	public ImageController( ImageStorageService imageStorageService, @NamedCache( "IMAGE-CACHE" ) CacheApi cache ) {
+	public ImageController( ImageStorageService imageStorageService,  CacheApi cache ) {
 		this.imageStorageService = imageStorageService;
 		this.cache = cache;
 	}
