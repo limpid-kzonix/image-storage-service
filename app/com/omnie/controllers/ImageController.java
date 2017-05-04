@@ -59,6 +59,7 @@ public class ImageController extends Controller {
 			throws IOException, ExecutionException, InterruptedException {
 		String _objectId = objectId;
 		String _type = imageType;
+
 		File image = cache.getOrElse( objectId+_type, () -> {
 
 			File imageT = imageStorageService.getTypedImageById( _objectId, _type );
