@@ -59,11 +59,12 @@ public class ImageController extends Controller {
 			throws IOException, ExecutionException, InterruptedException {
 		String _objectId = objectId;
 		String _type = imageType;
+		String cacheKey = objectId + imageType;
 
-		File image = cache.getOrElse( objectId + _type, () -> {
+		File image = cache.getOrElse( cacheKey, () -> {
 
 			File imageT = imageStorageService.getTypedImageById( _objectId, _type );
-			cache.set( objectId+ _type , imageT );
+			cache.set( cacheKey , imageT );
 			return imageT;
 		} );
 
