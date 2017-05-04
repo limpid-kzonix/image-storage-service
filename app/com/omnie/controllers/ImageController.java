@@ -64,7 +64,7 @@ public class ImageController extends Controller {
 		File image = cache.getOrElse( cacheKey, () -> {
 
 			File imageT = imageStorageService.getTypedImageById( _objectId, _type );
-			cache.set( cacheKey , imageT );
+			cache.set( cacheKey , imageT, 60 * 15 );
 			return imageT;
 		} );
 
