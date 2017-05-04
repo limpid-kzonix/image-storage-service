@@ -18,6 +18,7 @@ resolvers += Resolver.url( "Typesafe Ivy releases", url( "https://repo.typesafe.
 libraryDependencies ++= Seq(
 	filters,
 	javaCore,
+	cache,
 	"com.impetus.kundera.client" % "kundera-mongo" % "3.8",
 	"com.google.code.gson" % "gson" % "2.8.0",
 	"com.fasterxml.jackson.core" % "jackson-core" % "2.8.8",
