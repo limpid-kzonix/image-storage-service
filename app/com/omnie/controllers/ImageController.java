@@ -45,7 +45,8 @@ public class ImageController extends Controller {
 	}
 
 	public Result deleteImage( String objectId ) {
-		return ok( );
+		imageStorageService.delete( objectId );
+		return ok( objectId );
 	}
 
 	public Result getImageSource( String objectId, String imageType )
