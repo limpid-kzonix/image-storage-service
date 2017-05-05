@@ -23,8 +23,10 @@ public interface ImageStorageService {
 	@Transactional
 	void delete( String id );
 
+	@Transactional
 	void multipleDelete( List<String> ids );
 
+	@Transactional
 	Image prepareAndSave( Http.MultipartFormData.FilePart< File > picture)
 			throws IOException, ExecutionException, InterruptedException;
 
