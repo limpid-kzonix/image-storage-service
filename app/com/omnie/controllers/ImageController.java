@@ -56,9 +56,6 @@ public class ImageController extends Controller {
 
 	public Result deleteImages(){
 
-
-
-
 		return ok(Json.toJson( request().body().asJson() ));
 	}
 
