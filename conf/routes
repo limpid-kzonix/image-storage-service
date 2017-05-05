@@ -2,9 +2,10 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-POST        /omnie/api/image/v1/upload/         com.omnie.controllers.ImageController.uploadImage
-GET         /omnie/api/image/v1/retriew/        com.omnie.controllers.ImageController.getImageSource(objectId:String, imageType:String)
-DELETE      /omnie/api/image/v1/delete/         com.omnie.controllers.ImageController.deleteImage(objectId : String)
+POST          /omnie/api/image/v1/upload/                   com.omnie.controllers.ImageController.uploadImage
+GET           /omnie/api/image/v1/retriew/                  com.omnie.controllers.ImageController.getImageSource(objectId:String, imageType:String)
+DELETE        /omnie/api/image/v1/delete/                   com.omnie.controllers.ImageController.deleteImage(objectId : String)
+DELETE        /omnie/api/image/v1/delete/collections        com.omnie.controllers.ImageController.deleteImages
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file                                 controllers.Assets.versioned(path="/public", file: Asset)
