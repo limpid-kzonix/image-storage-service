@@ -57,9 +57,7 @@ public class ImageController extends Controller {
 
 	public Result deleteImages(){
 		List<String> images =  (List<String>) Json.fromJson( request().body().asJson() , List.class );
-
-
-
+		imageStorageService.multipleDelete( images );
 		return ok(Json.toJson( images ));
 	}
 

@@ -52,6 +52,10 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 		imageStorageDao.delete( id );
 	}
 
+	@Override public void multipleDelete( List<String> ids ) {
+		imageStorageDao.deleteByObjectId( ids );
+	}
+
 
 	@Override public Image prepareAndSave( Http.MultipartFormData.FilePart< File > picture )
 			throws IOException, ExecutionException, InterruptedException {

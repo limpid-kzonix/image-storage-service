@@ -17,6 +17,9 @@ public interface GenericDao< E > {
 
 	void delete( E entity );
 
+
 	void delete( String objectId );
+
+	void deleteByObjectId( List<String> objectId );
 
 }

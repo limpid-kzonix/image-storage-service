@@ -6,6 +6,7 @@ import play.mvc.Http;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -21,6 +22,8 @@ public interface ImageStorageService {
 
 	@Transactional
 	void delete( String id );
+
+	void multipleDelete( List<String> ids );
 
 	Image prepareAndSave( Http.MultipartFormData.FilePart< File > picture)
 			throws IOException, ExecutionException, InterruptedException;
