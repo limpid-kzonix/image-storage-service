@@ -36,25 +36,33 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 		EntityTransaction transaction = em.getTransaction( );
 		transaction.begin( );
 		em.persist( entity );
-		transaction.commit();
+		transaction.commit( );
 		return entity;
 	}
 
 
 	@Override
 	public E findById( String objectId ) {
-		return getEntityManager( )
-				.createQuery(
-						"SELECT entity FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.imageId = :id",
-						entityClass )
+		EntityManager em = getEntityManager( );
+		EntityTransaction transaction = em.getTransaction( );
+		transaction.begin( );
+		E entity = em.createQuery(
+				"SELECT entity FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.imageId = :id",
+				entityClass )
 				.setParameter( "id", objectId ).getSingleResult( );
+		transaction.commit();
+		return entity;
 	}
 
 	@Override
 	public List< E > findAll( ) {
-		return getEntityManager( )
-				.createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity", entityClass )
+		EntityManager em = getEntityManager( );
+		EntityTransaction transaction = em.getTransaction( );
+		transaction.begin( );
+				List<E> entities =  em.createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity", entityClass )
 				.getResultList( );
+		transaction.commit();
+		return entities;
 	}
 
 	@Override
@@ -63,7 +71,7 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 		EntityTransaction transaction = em.getTransaction( );
 		transaction.begin( );
 		em.remove( entity );
-		transaction.commit();
+		transaction.commit( );
 	}
 
 	@Override
@@ -71,9 +79,9 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 		EntityManager em = getEntityManager( );
 		EntityTransaction transaction = em.getTransaction( );
 		transaction.begin( );
-				em.createQuery( "DELETE FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.imageId = :id" )
+		em.createQuery( "DELETE FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.imageId = :id" )
 				.setParameter( "id", objectId ).executeUpdate( );
-		transaction.commit();
+		transaction.commit( );
 	}
 
 
@@ -84,7 +92,7 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 		em.createQuery( "DELETE FROM " + entityClass.getSimpleName( ) + " entity WHERE" +
 				                " entity.imageId = :id" )
 				.setParameter( "id", objectIds ).executeUpdate( );
-		transaction.commit();
+		transaction.commit( );
 	}
 
 
