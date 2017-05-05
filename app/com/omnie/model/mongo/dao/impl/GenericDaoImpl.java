@@ -1,6 +1,8 @@
 package com.omnie.model.mongo.dao.impl;
 
 import com.google.inject.Inject;
+import com.impetus.client.mongodb.MongoDBClientProperties;
+import com.mongodb.WriteConcern;
 import com.omnie.model.KunderaEntityManageFactory;
 import com.omnie.model.mongo.dao.GenericDao;
 
@@ -36,12 +38,12 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 	}
 
 
-
 	@Override
 	public E findById( String objectId ) {
 		return getEntityManager( )
-				.createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.imageId = :id",
-				              entityClass )
+				.createQuery(
+						"SELECT entity FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.imageId = :id",
+						entityClass )
 				.setParameter( "id", objectId ).getSingleResult( );
 	}
 
@@ -59,22 +61,22 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 
 	@Override
 	public void delete( String objectId ) {
-		getEntityManager( ).createQuery( "DELETE FROM " + entityClass.getSimpleName() + " entity WHERE entity.imageId = :id" )
-				.setParameter( "id", objectId ).executeUpdate();
+		getEntityManager( )
+				.createQuery( "DELETE FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.imageId = :id" )
+				.setParameter( "id", objectId ).executeUpdate( );
 	}
 
 
-
-	@Override public void deleteByObjectId( List<String> objectIds ){
+	@Override public void deleteByObjectId( List< String > objectIds ) {
 		EntityManager em = getEntityManager( );
-		em.createQuery( "DELETE FROM " + entityClass.getSimpleName() + " entity WHERE" +
-				                                                     " " +
-				                                                "entity.imageId = :id" )
-				.setParameter( "id", objectIds ).executeUpdate();
-		em.close();
+		em.setProperty( MongoDBClientProperties.ORDERED_BULK_OPERATION, true );
+		em.setProperty( MongoDBClientProperties.WRITE_CONCERN, WriteConcern.UNACKNOWLEDGED );
+		em.createQuery( "DELETE FROM " + entityClass.getSimpleName( ) + " entity WHERE" +
+				                " " +
+				                "entity.imageId = :id" )
+				.setParameter( "id", objectIds ).executeUpdate( );
+		em.close( );
 	}
-
-
 
 
 }
