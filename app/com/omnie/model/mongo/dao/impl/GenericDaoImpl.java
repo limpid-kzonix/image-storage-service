@@ -6,6 +6,7 @@ import com.omnie.model.mongo.dao.GenericDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -31,7 +32,11 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 
 	@Override
 	public E save( E entity ) {
-		getEntityManager( ).persist( entity );
+		EntityManager em = getEntityManager( );
+		EntityTransaction transaction = em.getTransaction( );
+		transaction.begin( );
+		em.persist( entity );
+		transaction.commit();
 		return entity;
 	}
 
