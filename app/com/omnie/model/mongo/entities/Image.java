@@ -30,11 +30,6 @@ public class Image implements Serializable {
 	private String name;
 
 	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-	@JoinTable( name = "image_sources", joinColumns = {
-			@JoinColumn( name = "img_id", nullable = false, updatable = false )
-	}, inverseJoinColumns = {
-			@JoinColumn( name = "src_id", nullable = false, updatable = false )
-	} )
 	private List<ImageSource> imageSources;
 
 

@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
 public class KunderaEntityManageFactory {
 
 	@Getter
-	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory( "mongoUnit" );
+	private static EntityManagerFactory managerFactory ;//= Persistence.createEntityManagerFactory( "mongoUnit" );
 
 	public KunderaEntityManageFactory(){
 		managerFactory = Persistence.createEntityManagerFactory( "mongoUnit" );

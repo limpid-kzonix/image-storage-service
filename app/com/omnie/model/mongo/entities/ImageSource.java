@@ -39,8 +39,8 @@ public class ImageSource implements Serializable {
 	@Column( name = "source" )
 	private byte[] imageSource;
 
-	@ManyToOne
-	@Column(name = "parent")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "parent_id")
 	private Image image;
 
 
