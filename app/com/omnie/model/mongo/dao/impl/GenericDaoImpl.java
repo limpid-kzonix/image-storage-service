@@ -66,8 +66,12 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 
 
 	@Override public void deleteByObjectId( List<String> objectIds ){
-		getEntityManager( ).createQuery( "DELETE FROM " + entityClass.getSimpleName() + " entity WHERE entity.imageId = :id" )
+		EntityManager em = getEntityManager( );
+		em.createQuery( "DELETE FROM " + entityClass.getSimpleName() + " entity WHERE" +
+				                                                     " " +
+				                                                "entity.imageId = :id" )
 				.setParameter( "id", objectIds ).executeUpdate();
+		em.close();
 	}
 
 
