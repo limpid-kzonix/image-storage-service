@@ -9,7 +9,6 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
-import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -32,7 +31,6 @@ public class ImageController extends Controller {
 		this.cache = cache;
 	}
 
-	@Transactional
 	public Result uploadImage( ) throws IOException {
 
 		Http.MultipartFormData< File > body = request( ).body( ).asMultipartFormData( );
@@ -50,19 +48,16 @@ public class ImageController extends Controller {
 			return badRequest( "Error" );
 		}
 	}
-	@Transactional
 	public Result deleteImage( String objectId ) {
 		imageStorageService.delete( objectId );
 		return ok( objectId );
 	}
-	@Transactional
 	public Result deleteImages(){
 		List<String> images =  (List<String>) Json.fromJson( request().body().asJson() , List.class );
 		imageStorageService.multipleDelete( images );
 		return ok(Json.toJson( images ));
 	}
 
-	@Transactional
 	public Result getImageSource( String objectId, String imageType )
 			throws IOException, ExecutionException, InterruptedException {
 		String _objectId = objectId;

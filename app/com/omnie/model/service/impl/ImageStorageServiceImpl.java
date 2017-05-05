@@ -11,7 +11,6 @@ import play.mvc.Http;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.transaction.Transactional;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -40,7 +39,6 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 		this.imageStorageDao = imageStorageDao;
 	}
 
-	@Transactional
 	@Override public void saveImage( Image image ) {
 		imageStorageDao.save( image );
 	}
