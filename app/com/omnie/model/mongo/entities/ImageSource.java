@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table( name = "image_sources", schema = "play-db@mongoUnit" )
+@Table( name = "sources", schema = "play-db@mongoUnit" )
 public class ImageSource implements Serializable {
 
 	@Id
@@ -38,6 +38,10 @@ public class ImageSource implements Serializable {
 	@Lob
 	@Column( name = "source" )
 	private byte[] imageSource;
+
+	@ManyToOne
+	@Column(name = "parent")
+	private Image image;
 
 
 

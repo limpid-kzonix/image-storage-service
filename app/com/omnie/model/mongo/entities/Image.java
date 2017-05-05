@@ -29,7 +29,7 @@ public class Image implements Serializable {
 	@Column( name = "name" )
 	private String name;
 
-	@ManyToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
 	@JoinTable( name = "image_sources", joinColumns = {
 			@JoinColumn( name = "img_id", nullable = false, updatable = false )
 	}, inverseJoinColumns = {
