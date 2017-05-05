@@ -82,7 +82,7 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 		EntityTransaction transaction = em.getTransaction( );
 		transaction.begin( );
 		em.createQuery( "DELETE FROM " + entityClass.getSimpleName( ) + " entity WHERE" +
-				                "entity.imageId = :id" )
+				                " entity.imageId = :id" )
 				.setParameter( "id", objectIds ).executeUpdate( );
 		transaction.commit();
 	}
