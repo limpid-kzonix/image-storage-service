@@ -11,6 +11,7 @@ import play.mvc.Result;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -55,8 +56,11 @@ public class ImageController extends Controller {
 	}
 
 	public Result deleteImages(){
+		List<String> images =  (List<String>) Json.fromJson( request().body().asJson() , List.class );
 
-		return ok(Json.toJson( request().body().asJson() ));
+
+
+		return ok(Json.toJson( images ));
 	}
 
 
