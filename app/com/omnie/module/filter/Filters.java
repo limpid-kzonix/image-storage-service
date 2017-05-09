@@ -3,6 +3,7 @@ package com.omnie.module.filter;
 
 import com.google.inject.Inject;
 import play.filters.cors.CORSFilter;
+import play.filters.hosts.AllowedHostsFilter;
 import play.http.HttpFilters;
 import play.mvc.EssentialFilter;
 
@@ -16,10 +17,11 @@ public class Filters implements HttpFilters {
 	private EssentialFilter[] filters;
 
 	@Inject
-	public Filters( LoggingFilter loggingFilter, CORSFilter corsFilter ) {
+	public Filters( LoggingFilter loggingFilter, CORSFilter corsFilter, AllowedHostsFilter allowedHostsFilter ) {
 		filters = new EssentialFilter[]{
 				loggingFilter.asJava( ),
-				corsFilter.asJava( )
+				corsFilter.asJava( ),
+		        allowedHostsFilter.asJava()
 		};
 	}
 
