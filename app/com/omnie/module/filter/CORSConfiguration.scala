@@ -3,11 +3,13 @@ package com.omnie.module.filter
 import play.api.mvc.{EssentialAction, EssentialFilter, RequestHeader, Results}
 import play.mvc.Http
 
+import scala.concurrent.ExecutionContext
+
 /**
 	* Created by limpid on 5/9/17.
 	*/
 class CORSConfiguration extends EssentialFilter {
-	def apply( nextFilter: EssentialAction ) = new EssentialAction {
+	def apply( nextFilter: EssentialAction )(implicit ec: ExecutionContext) = new EssentialAction {
 		def apply( requestHeader: RequestHeader ) = {
 			nextFilter( requestHeader )
 				.map { result =>
