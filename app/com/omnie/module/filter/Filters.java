@@ -17,11 +17,13 @@ public class Filters implements HttpFilters {
 	private EssentialFilter[] filters;
 
 	@Inject
-	public Filters( LoggingFilter loggingFilter, CORSFilter corsFilter, AllowedHostsFilter allowedHostsFilter ) {
+	public Filters( LoggingFilter loggingFilter, CORSFilter corsFilter, AllowedHostsFilter allowedHostsFilter,
+	                CORSCongiguration corsCongiguration ) {
 		filters = new EssentialFilter[]{
 				loggingFilter.asJava( ),
 				corsFilter.asJava( ),
-		        allowedHostsFilter.asJava()
+		        allowedHostsFilter.asJava(),
+		        corsCongiguration.asJava()
 		};
 	}
 
