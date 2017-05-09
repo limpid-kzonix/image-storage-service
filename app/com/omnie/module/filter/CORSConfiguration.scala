@@ -1,6 +1,8 @@
 package com.omnie.module.filter
 
-import play.api.mvc.{EssentialAction, EssentialFilter, RequestHeader, Results}
+import akka.util.ByteString
+import play.api.libs.streams.Accumulator
+import play.api.mvc._
 import play.mvc.Http
 
 import scala.concurrent.ExecutionContext
@@ -9,11 +11,12 @@ import scala.concurrent.ExecutionContext
 	* Created by limpid on 5/9/17.
 	*/
 class CORSConfiguration extends EssentialFilter {
-	def apply( nextFilter: EssentialAction )(implicit ec: ExecutionContext) = new EssentialAction {
-		def apply( requestHeader: RequestHeader ) = {
-			nextFilter( requestHeader )
+	override def apply( nextFilter: EssentialAction ) = new EssentialAction {
+
+		override def apply( v1: RequestHeader ): Accumulator[ByteString, Result] = {
+			nextFilter( v1 )
 				.map { result =>
-					if ( requestHeader.method.equals( "OPTIONS" ) ) {
+					if ( v1.method.equals( "OPTIONS" ) ) {
 						Results.Ok.withHeaders(
 							Http.HeaderNames.ACCESS_CONTROL_ALLOW_ORIGIN -> "*",
 							Http.HeaderNames.ACCESS_CONTROL_ALLOW_HEADERS -> "X-Requested-With, Accept, Content-Type",
@@ -28,4 +31,5 @@ class CORSConfiguration extends EssentialFilter {
 				}
 		}
 	}
+
 }
