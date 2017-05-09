@@ -26,6 +26,5 @@ class CORSCongiguration extends EssentialFilter {
 				}
 		}
 	}
-}
 
 }
