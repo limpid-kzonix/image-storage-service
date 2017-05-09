@@ -6,7 +6,7 @@ import play.mvc.Http
 /**
 	* Created by limpid on 5/9/17.
 	*/
-class CORSCongiguration extends EssentialFilter {
+class CORSConfiguration extends EssentialFilter {
 	def apply( nextFilter: EssentialAction ) = new EssentialAction {
 		def apply( requestHeader: RequestHeader ) = {
 			nextFilter( requestHeader )
@@ -26,5 +26,4 @@ class CORSCongiguration extends EssentialFilter {
 				}
 		}
 	}
-
 }

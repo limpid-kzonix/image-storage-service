@@ -18,7 +18,7 @@ public class Filters implements HttpFilters {
 
 	@Inject
 	public Filters( LoggingFilter loggingFilter, CORSFilter corsFilter, AllowedHostsFilter allowedHostsFilter,
-	                CORSCongiguration corsCongiguration ) {
+	                CORSConfiguration corsCongiguration ) {
 		filters = new EssentialFilter[]{
 				loggingFilter.asJava( ),
 				corsFilter.asJava( ),
