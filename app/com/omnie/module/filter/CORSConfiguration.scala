@@ -5,7 +5,7 @@ import play.api.libs.streams.Accumulator
 import play.api.mvc._
 import play.mvc.Http
 
-import scala.concurrent.ExecutionContext
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
 /**
 	* Created by limpid on 5/9/17.
