@@ -38,7 +38,7 @@ public class ImageController extends Controller {
 		if ( picture != null ) {
 
 			try {
-				return ok( Json.toJson( imageStorageService.prepareAndSave( picture ).getImageId( ) ) );
+				return ok( imageStorageService.prepareAndSave( picture ).getImageId( ) );
 			} catch ( ExecutionException | InterruptedException e ) {
 				e.printStackTrace( );
 			}
