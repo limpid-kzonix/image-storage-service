@@ -3,6 +3,7 @@ package com.omnie.controllers;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.omnie.model.service.ImageStorageService;
+import com.omnie.module.error.handler.ErrorMessage;
 import play.cache.CacheApi;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -42,10 +43,10 @@ public class ImageController extends Controller {
 			} catch ( ExecutionException | InterruptedException e ) {
 				e.printStackTrace( );
 			}
-			return ok( "jpeg" );
+			return ok( Json.toJson( new ErrorMessage("FS Error") ) );
 		} else {
 			flash( "error", "Missing file" );
-			return badRequest( "Error" );
+			return ok( Json.toJson( new ErrorMessage("Picture is invalid") ) );
 		}
 	}
 	public Result deleteImage( String objectId ) {
