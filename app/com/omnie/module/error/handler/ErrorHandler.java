@@ -8,6 +8,7 @@ import play.api.OptionalSourceMapper;
 import play.api.UsefulException;
 import play.api.routing.Router;
 import play.http.DefaultHttpErrorHandler;
+import play.libs.Json;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Results;
@@ -30,45 +31,45 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
 
 	protected CompletionStage< Result > onProdServerError( Http.RequestHeader request, UsefulException exception ) {
 		return CompletableFuture.completedFuture(
-				Results.internalServerError( "A server error occurred: " + exception.getMessage( ) )
-		                                        );
+				Results.ok( Json.toJson( new ErrorMessage( exception.getMessage() )) )
+				          );
 	}
 
 	protected CompletionStage< Result > onForbidden( Http.RequestHeader request, String message ) {
 		return CompletableFuture.completedFuture(
-				Results.forbidden( "You're not allowed to access this resource." )
+				Results.ok( Json.toJson( new ErrorMessage( message) ))
 		                                        );
 	}
 
 	@Override
 	public CompletionStage< Result > onClientError( Http.RequestHeader request, int statusCode, String message ) {
 		return CompletableFuture.completedFuture(
-				Results.internalServerError( "A server error occurred: " + message )
+				Results.ok( Json.toJson( new ErrorMessage( message) ))
 		                                        );
 	}
 
 	@Override protected CompletionStage< Result > onBadRequest( Http.RequestHeader request, String message ) {
 		return CompletableFuture.completedFuture(
-				Results.internalServerError( "A server error occurred: " + message )
+				Results.ok( Json.toJson( new ErrorMessage( message) ))
 		                                        );
 	}
 
 	@Override protected CompletionStage< Result > onNotFound( Http.RequestHeader request, String message ) {
 		return CompletableFuture.completedFuture(
-				Results.internalServerError( "A server error occurred: " + message )
+				Results.ok( Json.toJson( new ErrorMessage( message) ))
 		                                        );
 	}
 
 	@Override protected CompletionStage< Result > onOtherClientError( Http.RequestHeader request, int statusCode,
 	                                                                  String message ) {
 		return CompletableFuture.completedFuture(
-				Results.internalServerError( "A server error occurred: " + message )
+				Results.ok( Json.toJson( new ErrorMessage( message) ))
 		                                        );
 	}
 
 	@Override public CompletionStage< Result > onServerError( Http.RequestHeader request, Throwable exception ) {
 		return CompletableFuture.completedFuture(
-				Results.internalServerError( "A server error occurred: " + exception.getMessage( ) )
+				Results.ok( Json.toJson( new ErrorMessage( exception.getMessage() ) ))
 		                                        );
 	}
 
@@ -79,7 +80,7 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
 	@Override
 	protected CompletionStage< Result > onDevServerError( Http.RequestHeader request, UsefulException exception ) {
 		return CompletableFuture.completedFuture(
-				Results.internalServerError( "A server error occurred: " + exception.getMessage( ) )
+				Results.ok( Json.toJson( new ErrorMessage( exception.getMessage()) ))
 		                                        );
 	}
 }
