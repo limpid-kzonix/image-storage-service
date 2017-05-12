@@ -68,7 +68,9 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 
 		Image imageEntity = new Image( );
 		imageEntity.setImageId( new BigInteger( 130, random ).toString( 32 ) + UUID.randomUUID( ).toString( ) );
-		imageEntity.setName( String.format( "[%s]-{%s}", contentType.replace( '/', '\0' ), ( UUID.randomUUID( )
+		imageEntity.setName( String.format( "[%s]-{%s}", contentType == null ? "" : contentType.replace( '/', '\0' ), (
+				UUID
+				.randomUUID( )
 				.toString( )
 				+ UUID
 				.randomUUID( ) ) + ".jpg" ) );

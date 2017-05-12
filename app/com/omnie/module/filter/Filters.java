@@ -20,9 +20,9 @@ public class Filters implements HttpFilters {
 	public Filters( LoggingFilter loggingFilter, CORSFilter corsFilter, AllowedHostsFilter allowedHostsFilter,
 	                CORSConfiguration corsCongiguration ) {
 		filters = new EssentialFilter[]{
-				loggingFilter.asJava( ),
+				//loggingFilter.asJava( ),
 				corsFilter.asJava( ),
-		        allowedHostsFilter.asJava(),
+		        //allowedHostsFilter.asJava(),
 		        corsCongiguration.asJava()
 		};
 	}

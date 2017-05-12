@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.omnie.model.service.ImageStorageService;
 import com.omnie.module.error.handler.ErrorMessage;
+import com.omnie.module.utils.Message;
 import play.cache.CacheApi;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -39,7 +40,10 @@ public class ImageController extends Controller {
 		if ( picture != null ) {
 
 			try {
-				return ok( imageStorageService.prepareAndSave( picture ).getImageId( ) );
+				return ok( Json.toJson( new Message(
+					200,
+					imageStorageService.prepareAndSave( picture ).getImageId( ) )
+				) );
 			} catch ( ExecutionException | InterruptedException e ) {
 				e.printStackTrace( );
 			}
