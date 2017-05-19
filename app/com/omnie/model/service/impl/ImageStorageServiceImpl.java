@@ -64,7 +64,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 		BufferedImage image = ImageIO.read( file );
 
 
-		image = cropImage( image, getImageDimension( image ).get( ) ).get( );
+		//image = cropImage( image, getImageDimension( image ).get( ) ).get( );
 
 		Image imageEntity = new Image( );
 		imageEntity.setImageId( new BigInteger( 130, random ).toString( 32 ) + UUID.randomUUID( ).toString( ) );
@@ -147,6 +147,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 	private CompletableFuture< BufferedImage > resizeImageWithHint( BufferedImage originalImage, int width,
 	                                                                int height ) {
 		return CompletableFuture.supplyAsync( ( ) -> {
+
 			int type = originalImage.getType( ) == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType( );
 			BufferedImage resizedImage = new BufferedImage( width, height, type );
 			Graphics2D g = resizedImage.createGraphics( );
@@ -219,15 +220,22 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 
 		return CompletableFuture.supplyAsync( ( ) -> {
 
+			BufferedImage bufferedImage = null;
+			try {
+				bufferedImage = cropImage( image, getImageDimension( image ).get( ) ).get( );
+			} catch ( InterruptedException | ExecutionException e ) {
+				e.printStackTrace( );
+			}
+
 			ImageSource imageSource = new ImageSource( );
 			imageSource.setImageId( new BigInteger( 130, random ).toString( 32 ) + UUID.randomUUID( ).toString( ) );
 			imageSource.setExtension( ImageExtension.JPG.getType( ) );
-			imageSource.setHeight( image.getHeight( ) );
-			imageSource.setWidth( image.getWidth( ) );
+			imageSource.setHeight( bufferedImage.getHeight( ) );
+			imageSource.setWidth( bufferedImage.getWidth( ) );
 			imageSource.setType( ImageSourceType.SMALL.getType( ) );
 			try {
 				imageSource
-						.setImageSource( generateImageSource( resizeImageWithHint( image, 200, 200 ).get( ) ).get( ) );
+						.setImageSource( generateImageSource( resizeImageWithHint( bufferedImage, 200, 200 ).get( ) ).get( ) );
 			} catch ( InterruptedException | ExecutionException e ) {
 				e.printStackTrace( );
 			}
@@ -239,15 +247,22 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 
 		return CompletableFuture.supplyAsync( ( ) -> {
 
+			BufferedImage bufferedImage = null;
+			try {
+				bufferedImage = cropImage( image, getImageDimension( image ).get( ) ).get( );
+			} catch ( InterruptedException | ExecutionException e ) {
+				e.printStackTrace( );
+			}
+
 			ImageSource imageSource = new ImageSource( );
 			imageSource.setImageId( new BigInteger( 130, random ).toString( 32 ) + UUID.randomUUID( ).toString( ) );
 			imageSource.setExtension( ImageExtension.JPG.getType( ) );
-			imageSource.setHeight( image.getHeight( ) );
-			imageSource.setWidth( image.getWidth( ) );
+			imageSource.setHeight( bufferedImage.getHeight( ) );
+			imageSource.setWidth( bufferedImage.getWidth( ) );
 			imageSource.setType( ImageSourceType.MEDIUM.getType( ) );
 			try {
 				imageSource
-						.setImageSource( generateImageSource( resizeImageWithHint( image, 500, 500 ).get( ) ).get( ) );
+						.setImageSource( generateImageSource( resizeImageWithHint( bufferedImage, 500, 500 ).get( ) ).get( ) );
 			} catch ( InterruptedException | ExecutionException e ) {
 				e.printStackTrace( );
 			}
