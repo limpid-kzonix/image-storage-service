@@ -1,5 +1,6 @@
 package com.omnie.model.service.impl;
 
+
 import com.omnie.model.mongo.dao.ImageStorageDao;
 import com.omnie.model.mongo.entities.Image;
 import com.omnie.model.mongo.entities.ImageSource;
@@ -24,11 +25,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+
 /**
  * Created by Harmeet Singh(Taara) on 27/12/16.
  */
 @Singleton
 public class ImageStorageServiceImpl implements ImageStorageService {
+
 
 	private ImageStorageDao imageStorageDao;
 
@@ -51,7 +54,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 		imageStorageDao.delete( id );
 	}
 
-	@Override public void multipleDelete( List<String> ids ) {
+	@Override public void multipleDelete( List< String > ids ) {
 		imageStorageDao.deleteByObjectId( ids );
 	}
 
@@ -59,7 +62,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 	@Override public Image prepareAndSave( Http.MultipartFormData.FilePart< File > picture )
 			throws IOException, ExecutionException, InterruptedException {
 		String fileName = picture.getFilename( );
-		String contentType = picture.getContentType( );
+		String contentType = picture.getContentType( ) == null ? "image" : picture.getContentType( );
 		File file = picture.getFile( );
 		BufferedImage image = ImageIO.read( file );
 
@@ -68,20 +71,20 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 
 		Image imageEntity = new Image( );
 		imageEntity.setImageId( new BigInteger( 130, random ).toString( 32 ) + UUID.randomUUID( ).toString( ) );
-		imageEntity.setName( String.format( "[%s]-{%s}", contentType == null ? "" : contentType.replace( '/', '\0' ), (
+		imageEntity.setName( String.format( "[%s]-{%s}", contentType, (
 				UUID
-				.randomUUID( )
-				.toString( )
-				+ UUID
-				.randomUUID( ) ) + ".jpg" ) );
+						.randomUUID( )
+						.toString( )
+						+ UUID
+						.randomUUID( ) ) + ".png" ) );
 		List< ImageSource > imageSourceList = new ArrayList<>( );
 		imageSourceList.addAll( prepareImageSources( image ).get( ) );
 		imageEntity.setImageSources( imageSourceList );
 		saveImage( imageEntity );
 
 		//imageStorageDao.save( imageEntity );
-		File outputFile = File.createTempFile( imageEntity.getImageId( ), ".jpg" );
-		ImageIO.write( image, "jpg", outputFile );
+		File outputFile = File.createTempFile( imageEntity.getImageId( ), ".png" );
+		ImageIO.write( image, "png", outputFile );
 		return imageEntity;
 
 	}
@@ -98,14 +101,14 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 			return imageEntity.getImageSources( ).isEmpty( ) ? null : imageEntity.getImageSources( ).get( 0 )
 					.getImageSource( );
 		} ).thenApply( byteArray -> byteArray );
-		CompletableFuture<File> filePromise = CompletableFuture.supplyAsync( () -> {
+		CompletableFuture< File > filePromise = CompletableFuture.supplyAsync( ( ) -> {
 			File file = null;
 			try {
-				file = File.createTempFile( UUID.randomUUID().toString(),"." + ImageExtension.JPG.getType() );
-				InputStream in = new ByteArrayInputStream( bytePromise.get() );
+				file = File.createTempFile( UUID.randomUUID( ).toString( ), "." + ImageExtension.PNG.getType( ) );
+				InputStream in = new ByteArrayInputStream( bytePromise.get( ) );
 				BufferedImage imageFromSource = ImageIO.read( in );
 
-				ImageIO.write( imageFromSource, ImageExtension.JPG.getType(), file );
+				ImageIO.write( imageFromSource, ImageExtension.PNG.getType( ), file );
 				return file;
 			} catch ( IOException ignored ) {
 
@@ -114,12 +117,12 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 			}
 			return file;
 		} ).thenApply( file -> {
-			if ( file == null ){
-				return File.listRoots()[1];
+			if ( file == null ) {
+				return File.listRoots( )[ 1 ];
 			}
 			return file;
 		} );
-		return filePromise.get();
+		return filePromise.get( );
 
 	}
 
@@ -155,8 +158,6 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 			g.dispose( );
 			g.setComposite( AlphaComposite.Src );
 
-			g.setRenderingHint( RenderingHints.KEY_INTERPOLATION,
-			                    RenderingHints.VALUE_INTERPOLATION_BILINEAR );
 			g.setRenderingHint( RenderingHints.KEY_RENDERING,
 			                    RenderingHints.VALUE_RENDER_QUALITY );
 			g.setRenderingHint( RenderingHints.KEY_ANTIALIASING,
@@ -191,7 +192,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream( );
 
 			try {
-				ImageIO.write( image, "jpg", byteArrayOutputStream );
+				ImageIO.write( image, "PNG", byteArrayOutputStream );
 			} catch ( IOException e ) {
 				e.printStackTrace( );
 			}
@@ -229,13 +230,14 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 
 			ImageSource imageSource = new ImageSource( );
 			imageSource.setImageId( new BigInteger( 130, random ).toString( 32 ) + UUID.randomUUID( ).toString( ) );
-			imageSource.setExtension( ImageExtension.JPG.getType( ) );
+			imageSource.setExtension( ImageExtension.PNG.getType( ) );
 			imageSource.setHeight( bufferedImage.getHeight( ) );
 			imageSource.setWidth( bufferedImage.getWidth( ) );
 			imageSource.setType( ImageSourceType.SMALL.getType( ) );
 			try {
 				imageSource
-						.setImageSource( generateImageSource( resizeImageWithHint( bufferedImage, 200, 200 ).get( ) ).get( ) );
+						.setImageSource(
+								generateImageSource( resizeImageWithHint( bufferedImage, 200, 200 ).get( ) ).get( ) );
 			} catch ( InterruptedException | ExecutionException e ) {
 				e.printStackTrace( );
 			}
@@ -256,13 +258,14 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 
 			ImageSource imageSource = new ImageSource( );
 			imageSource.setImageId( new BigInteger( 130, random ).toString( 32 ) + UUID.randomUUID( ).toString( ) );
-			imageSource.setExtension( ImageExtension.JPG.getType( ) );
+			imageSource.setExtension( ImageExtension.PNG.getType( ) );
 			imageSource.setHeight( bufferedImage.getHeight( ) );
 			imageSource.setWidth( bufferedImage.getWidth( ) );
 			imageSource.setType( ImageSourceType.MEDIUM.getType( ) );
 			try {
 				imageSource
-						.setImageSource( generateImageSource( resizeImageWithHint( bufferedImage, 500, 500 ).get( ) ).get( ) );
+						.setImageSource(
+								generateImageSource( resizeImageWithHint( bufferedImage, 500, 500 ).get( ) ).get( ) );
 			} catch ( InterruptedException | ExecutionException e ) {
 				e.printStackTrace( );
 			}
@@ -277,7 +280,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 
 			ImageSource imageSource = new ImageSource( );
 			imageSource.setImageId( new BigInteger( 130, random ).toString( 32 ) + UUID.randomUUID( ).toString( ) );
-			imageSource.setExtension( ImageExtension.JPG.getType( ) );
+			imageSource.setExtension( ImageExtension.PNG.getType( ) );
 			imageSource.setHeight( image.getHeight( ) );
 			imageSource.setWidth( image.getWidth( ) );
 			imageSource.setType( ImageSourceType.ORIGINAL.getType( ) );
