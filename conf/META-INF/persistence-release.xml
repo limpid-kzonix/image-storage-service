@@ -1,0 +1,29 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="mongoUnitRelease">
+        <provider>com.impetus.kundera.KunderaPersistence</provider>
+        <class>com.omnie.model.mongo.entities.Image</class>
+        <class>com.omnie.model.mongo.entities.ImageSource</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="kundera.nodes" value="localhost"/>
+            <property name="kundera.port" value="27017"/>
+            <property name="kundera.keyspace" value="omnie-image-service"/>
+            <property name="kundera.dialect" value="mongodb"/>
+            <!--<property name="kundera.username" value="admin"/>-->
+            <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
+            <!--<property name="kundera.ddl.auto.prepare" value="update" />-->
+            <property name="kundera.batch.size" value="5000" />
+            <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
+            <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
+            <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
+        </properties>
+    </persistence-unit>
+
+    <!--Persistence Unit for Testing-->
+
+
+</persistence>
