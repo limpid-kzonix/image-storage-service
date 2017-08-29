@@ -45,7 +45,7 @@ public class ImageController extends Controller {
 					imageStorageService.prepareAndSave( picture ).getImageId( ) )
 				) );
 			} catch ( Exception e ) {
-				return ok( Json.toJson( new ErrorMessage(307, "File limit : 5MB" ) ) );
+				return ok( Json.toJson( new ErrorMessage(307, "File limit : 2.5MB" ) ) );
 			}
 		} else {
 			flash( "error", "Missing file" );
