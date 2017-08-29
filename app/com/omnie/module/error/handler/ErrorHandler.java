@@ -37,7 +37,7 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
 
 	protected CompletionStage< Result > onForbidden( Http.RequestHeader request, String message ) {
 		return CompletableFuture.completedFuture(
-				Results.ok( Json.toJson( new ErrorMessage( message) ))
+				Results.ok( Json.toJson( new ErrorMessage( message ) ))
 		                                        );
 	}
 
