@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table( name = "images", schema = "play-db")
+@Table( name = "images")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Image implements Serializable {

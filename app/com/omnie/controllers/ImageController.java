@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import com.omnie.model.service.ImageStorageService;
 import com.omnie.module.error.handler.ErrorMessage;
 import com.omnie.module.utils.Message;
+import play.Logger;
 import play.cache.CacheApi;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -27,10 +28,13 @@ public class ImageController extends Controller {
 
 	private ImageStorageService imageStorageService;
 
+	private Logger logger;
+
 	@Inject
-	public ImageController( ImageStorageService imageStorageService,  CacheApi cache ) {
+	public ImageController( ImageStorageService imageStorageService,  CacheApi cache, Logger logger ) {
 		this.imageStorageService = imageStorageService;
 		this.cache = cache;
+		this.logger = logger;
 	}
 
 	public Result uploadImage( ) throws IOException {
