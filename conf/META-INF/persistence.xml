@@ -22,7 +22,7 @@
             <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
         </properties>
     </persistence-unit>
-    <persistence-unit name="mongoUnitDevServer">
+    <persistence-unit name="mongoUnit">
         <provider>com.impetus.kundera.KunderaPersistence</provider>
         <class>com.omnie.model.mongo.entities.Image</class>
         <class>com.omnie.model.mongo.entities.ImageSource</class>

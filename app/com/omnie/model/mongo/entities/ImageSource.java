@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table( name = "sources", schema = "play-db@mongoUnitDevServer")
+@Table( name = "sources", schema = "play-db@mongoUnit")
 public class ImageSource implements Serializable {
 
 	@Id
