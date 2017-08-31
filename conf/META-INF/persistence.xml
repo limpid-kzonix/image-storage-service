@@ -11,7 +11,7 @@
         <properties>
             <property name="kundera.nodes" value="localhost"/>
             <property name="kundera.port" value="27017"/>
-            <property name="kundera.keyspace" value="image_service"/>
+            <property name="kundera.keyspace" value="play-db"/>
             <property name="kundera.dialect" value="mongodb"/>
             <!--<property name="kundera.username" value="admin"/>-->
             <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
@@ -49,7 +49,7 @@
         <properties>
             <property name="kundera.nodes" value="localhost"/>
             <property name="kundera.port" value="27017"/>
-            <property name="kundera.keyspace" value="image_service_test"/>
+            <property name="kundera.keyspace" value="play-db"/>
             <property name="kundera.dialect" value="mongodb"/>
             <!--<property name="kundera.username" value="admin"/>-->
             <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
@@ -68,7 +68,7 @@
         <properties>
             <property name="kundera.nodes" value="localhost"/>
             <property name="kundera.port" value="27017"/>
-            <property name="kundera.keyspace" value="image_service_prod"/>
+            <property name="kundera.keyspace" value="play-db"/>
             <property name="kundera.dialect" value="mongodb"/>
             <!--<property name="kundera.username" value="admin"/>-->
             <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
