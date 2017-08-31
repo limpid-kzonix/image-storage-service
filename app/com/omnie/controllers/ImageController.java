@@ -37,7 +37,7 @@ public class ImageController extends Controller {
 		this.logger = logger;
 	}
 
-	public Result uploadImage( ) throws IOException {
+	public Result uploadImage( ) throws IOException, ExecutionException, InterruptedException {
 
 		Http.MultipartFormData< File > body = request( ).body( ).asMultipartFormData( );
 		Http.MultipartFormData.FilePart< File > picture = body.getFile( "picture" );
@@ -49,6 +49,7 @@ public class ImageController extends Controller {
 					imageStorageService.prepareAndSave( picture ).getImageId( ) )
 				) );
 			} catch ( Exception e ) {
+				 e.printStackTrace();
 				return ok( Json.toJson( new ErrorMessage(307, "File limit : 2.5MB" ) ) );
 			}
 		} else {
