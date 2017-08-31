@@ -3,7 +3,26 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 
-    <persistence-unit name="mongoUnit">
+    <persistence-unit name="mongoUnitLocal">
+        <provider>com.impetus.kundera.KunderaPersistence</provider>
+        <class>com.omnie.model.mongo.entities.Image</class>
+        <class>com.omnie.model.mongo.entities.ImageSource</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="kundera.nodes" value="localhost"/>
+            <property name="kundera.port" value="27017"/>
+            <property name="kundera.keyspace" value="image_service"/>
+            <property name="kundera.dialect" value="mongodb"/>
+            <!--<property name="kundera.username" value="admin"/>-->
+            <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
+            <!--<property name="kundera.ddl.auto.prepare" value="update" />-->
+            <property name="kundera.batch.size" value="5000" />
+            <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
+            <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
+            <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="mongoUnitDevServer">
         <provider>com.impetus.kundera.KunderaPersistence</provider>
         <class>com.omnie.model.mongo.entities.Image</class>
         <class>com.omnie.model.mongo.entities.ImageSource</class>
@@ -12,6 +31,44 @@
             <property name="kundera.nodes" value="localhost"/>
             <property name="kundera.port" value="27017"/>
             <property name="kundera.keyspace" value="play-db"/>
+            <property name="kundera.dialect" value="mongodb"/>
+            <!--<property name="kundera.username" value="admin"/>-->
+            <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
+            <!--<property name="kundera.ddl.auto.prepare" value="update" />-->
+            <property name="kundera.batch.size" value="5000" />
+            <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
+            <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
+            <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="mongoUnitTestServer">
+        <provider>com.impetus.kundera.KunderaPersistence</provider>
+        <class>com.omnie.model.mongo.entities.Image</class>
+        <class>com.omnie.model.mongo.entities.ImageSource</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="kundera.nodes" value="localhost"/>
+            <property name="kundera.port" value="27017"/>
+            <property name="kundera.keyspace" value="image_service_test"/>
+            <property name="kundera.dialect" value="mongodb"/>
+            <!--<property name="kundera.username" value="admin"/>-->
+            <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
+            <!--<property name="kundera.ddl.auto.prepare" value="update" />-->
+            <property name="kundera.batch.size" value="5000" />
+            <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
+            <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
+            <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="mongoUnitProdServer">
+        <provider>com.impetus.kundera.KunderaPersistence</provider>
+        <class>com.omnie.model.mongo.entities.Image</class>
+        <class>com.omnie.model.mongo.entities.ImageSource</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="kundera.nodes" value="localhost"/>
+            <property name="kundera.port" value="27017"/>
+            <property name="kundera.keyspace" value="image_service_prod"/>
             <property name="kundera.dialect" value="mongodb"/>
             <!--<property name="kundera.username" value="admin"/>-->
             <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
