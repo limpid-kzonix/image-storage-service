@@ -16,7 +16,7 @@
             <!--<property name="kundera.username" value="admin"/>-->
             <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
             <!--<property name="kundera.ddl.auto.prepare" value="update" />-->
-            <property name="kundera.batch.size" value="5000" />
+            <property name="kundera.batch.size" value="100000" />
             <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
             <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
             <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
@@ -35,7 +35,7 @@
             <!--<property name="kundera.username" value="admin"/>-->
             <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
             <!--<property name="kundera.ddl.auto.prepare" value="update" />-->
-            <property name="kundera.batch.size" value="5000" />
+            <property name="kundera.batch.size" value="100000" />
             <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
             <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
             <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
@@ -54,7 +54,7 @@
             <!--<property name="kundera.username" value="admin"/>-->
             <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
             <!--<property name="kundera.ddl.auto.prepare" value="update" />-->
-            <property name="kundera.batch.size" value="5000" />
+            <property name="kundera.batch.size" value="100000" />
             <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
             <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
             <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
@@ -73,7 +73,7 @@
             <!--<property name="kundera.username" value="admin"/>-->
             <!--<property name="kundera.password" value="8DtSQ30zbatRF0mB"/>-->
             <!--<property name="kundera.ddl.auto.prepare" value="update" />-->
-            <property name="kundera.batch.size" value="5000" />
+            <property name="kundera.batch.size" value="100000" />
             <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
             <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
             <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
