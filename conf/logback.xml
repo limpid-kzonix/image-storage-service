@@ -2,40 +2,34 @@
 <configuration>
 
   <property name="LOG_DIR" value="/var/log/omniecom-image/" />
-  <property name="LOG_FILENAME" value="log_data" />
-  <timestamp key="bySecond" datePattern="yyyy-MM-dd.HH:mm:ss" />
+  <property name="LOG_FILENAME" value="log-data.part" />
+  <timestamp key="bySecond" datePattern="yyyyMMdd.HHmmss"/>
 
   <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
 
   <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_DIR}/${LOG_FILENAME}_%d{yyyy-MM-dd HH:mm:ss}.error</file>
+
     <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%level] %logger in %thread : %logger{36} - :::  %msg%n :::  %message%n%xException</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%level] %logger in %thread : %logger{36}  :::  %msg%n ::: %message%n%xException</pattern>
     </encoder>
 
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>${LOG_DIR}/archived/error/${LOG_FILENAME}_%d{yyyy-MM-dd}.error.%i.log</fileNamePattern>
+      <fileNamePattern>${LOG_DIR}/archived/error/${LOG_FILENAME}.%d{yyyy-MM-dd}.error.%i.error</fileNamePattern>
       <totalSizeCap>1GB</totalSizeCap>
       <maxHistory>30</maxHistory>
       <maxFileSize>100MB</maxFileSize>
     </rollingPolicy>
-
-    <triggeringPolicy
-            class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-      <MaxFileSize>50MB</MaxFileSize>
-    </triggeringPolicy>
   </appender>
 
   <appender name="FILE-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_DIR}/${LOG_FILENAME}_%{bySecond}.log</file>
     <encoder>
       <pattern>%date [%level] from %logger in %thread - %message%n%xException</pattern>
     </encoder>
 
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>${LOG_DIR}/archived/info/${LOG_FILENAME}_%d{yyyy-MM-dd}.info.%i.log</fileNamePattern>
+      <fileNamePattern>${LOG_DIR}/archived/info/${LOG_FILENAME}.%d{yyyy-MM-dd}.info.%i.log</fileNamePattern>
       <totalSizeCap>1GB</totalSizeCap>
       <maxHistory>30</maxHistory>
       <maxFileSize>100MB</maxFileSize>
@@ -57,11 +51,11 @@
   </appender>
 
 
-  <logger name="application" level="info">
+  <logger name="application" level="warn">
     <appender-ref ref="ASYNCFILE-ERROR" />
   </logger>
 
-  <logger name="play" level="info" additivity="false">
+  <logger name="play" level="debug" additivity="false">
     <appender-ref ref="FILE-LOG" />
   </logger>
 
@@ -73,7 +67,7 @@
 
 
 
-  <logger name="akka.actor" level="info">
+  <logger name="akka.actor" level="warn">
     <appender-ref ref="FILE-LOG" />
   </logger>
 
