@@ -2,6 +2,9 @@ package com.omnie.controllers;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.impetus.kundera.KunderaException;
+import com.impetus.kundera.loader.KunderaAuthenticationException;
+import com.mongodb.MongoExecutionTimeoutException;
 import com.omnie.model.service.ImageStorageService;
 import com.omnie.module.error.handler.ErrorMessage;
 import com.omnie.module.utils.Message;
@@ -42,15 +45,23 @@ public class ImageController extends Controller {
 		Http.MultipartFormData< File > body = request( ).body( ).asMultipartFormData( );
 		Http.MultipartFormData.FilePart< File > picture = body.getFile( "picture" );
 		if ( picture != null ) {
-
+			Logger.info( "File uploaded ::: size = " + picture.getFile().length());
+			if (picture.getFile().exists()){
+				double bytes = picture.getFile().length();
+				double kilobytes = (bytes / 1024);
+				double megabytes = (kilobytes / 1024);
+				if (megabytes > 2.5) {
+					return ok( Json.toJson( new ErrorMessage(307, "File limit ::: 2.5MB" ) ) );
+				}
+			}
 			try {
 				return ok( Json.toJson( new Message(
 					200,
 					imageStorageService.prepareAndSave( picture ).getImageId( ) )
 				) );
-			} catch ( Exception e ) {
-				 e.printStackTrace();
-				return ok( Json.toJson( new ErrorMessage(307, "File limit : 2.5MB" ) ) );
+			} catch ( MongoExecutionTimeoutException | KunderaException e ) {
+				e.printStackTrace();
+				return ok( Json.toJson( new ErrorMessage(500, "Service unavailable" ) ) );
 			}
 		} else {
 			flash( "error", "Missing file" );
