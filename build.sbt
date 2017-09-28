@@ -4,7 +4,7 @@ name := """Omnie ImageService"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file( "." )).enablePlugins( PlayJava, DebianPlugin )
+lazy val root = (project in file( "." )).enablePlugins( PlayJava, PlayAkkaHttpServer, DebianPlugin )
 
 scalaVersion := "2.11.8"
 
@@ -36,9 +36,9 @@ routesGenerator := InjectedRoutesGenerator
 publishMavenStyle := false
 
 
-fork in run := true
+fork in run := false
 
-fork in stage := true
+fork in stage := false
 
 
 
