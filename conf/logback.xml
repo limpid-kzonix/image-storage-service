@@ -67,11 +67,11 @@
 
 
 
-  <logger name="akka.actor" level="warn">
-    <appender-ref ref="FILE-LOG" />
+  <logger name="akka.actor" level="INFO">
+    <appender-ref ref="FILE-ERROR" />
   </logger>
 
-  <root level="error">
+  <root level="INFO">
     <appender-ref ref="FILE-ERROR" />
     <appender-ref ref="ASYNCFILE-ERROR" />
   </root>
