@@ -22,7 +22,7 @@ public class Filters implements HttpFilters {
 		filters = new EssentialFilter[]{
 				loggingFilter.asJava( ),
 				corsFilter.asJava( ),
-		        allowedHostsFilter.asJava(),
+		        //allowedHostsFilter.asJava(),
 		        corsCongiguration.asJava()
 		};
 	}
