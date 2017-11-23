@@ -1,4 +1,4 @@
-package com.omnie.model.service.impl;
+package com.omnie.model.service;
 
 import com.omnie.model.mongo.dao.ImageStorageDao;
 import com.omnie.model.mongo.entities.Image;
@@ -37,7 +37,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
 	private SecureRandom random = new SecureRandom( );
 
 	@Inject
-	public ImageStorageServiceImpl(ImageStorageDao imageStorageDao ) {
+	public ImageStorageServiceImpl( ImageStorageDao imageStorageDao ) {
 		this.imageStorageDao = imageStorageDao;
 	}
 

@@ -1,3 +1,5 @@
+package com.omnie;
+
 import com.omnie.model.KunderaEntityManageFactory;
 import com.omnie.model.mongo.dao.ImageStorageDao;
 import com.omnie.model.mongo.dao.impl.ImageStorageDaoimpl;
@@ -10,7 +12,7 @@ import com.google.inject.AbstractModule;
  * different types. This Guice module is created when the Play
  * application starts.
  * <p>
- * Play will automatically use any class called `Module` that is in
+ * Play will automatically use any class called `com.omnie.Module` that is in
  * the root package. You can create modules in other locations by
  * adding `play.modules.enabled` settings to the `application.conf`
  * configuration file.
