@@ -35,6 +35,7 @@ routesGenerator := InjectedRoutesGenerator
 
 publishMavenStyle := false
 
+javaOptions ++= Seq("-Xmx2G")
 
 fork in run := false
 
