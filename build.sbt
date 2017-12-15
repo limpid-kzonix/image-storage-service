@@ -50,7 +50,7 @@ fork in stage := false
 dockerBaseImage := "openjdk:8-jre-alpine"
 packageName in Docker := "image-service-old"
 dockerCommands := dockerCommands.value.flatMap {
-	case cmd@Cmd("FROM", _) => List(cmd, Cmd("RUN", "apk update && apk add bash"))
+	case cmd@Cmd("FROM", _) => List(cmd, Cmd("RUN", "apk update && apk add bash"), Cmd("mkdir", "/opt/docker/logs"))
 	case other => List(other)
 }
 
@@ -58,7 +58,6 @@ dockerEntrypoint := Seq("bin/omnie-imageservice", "-Dplay.crypto.secret=asdasdas
 maintainer := "Alexander Balyshyn"
 dockerExposedPorts in Docker := Seq(9000, 9443)
 dockerExposedVolumes := Seq("/opt/docker/logs")
-defaultLinuxInstallLocation in Docker := "/opt/docker"
 
 
 

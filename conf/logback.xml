@@ -15,7 +15,7 @@
 
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>${application.home:-.}/logs/archived/error/${LOG_FILENAME}.%d{yyyy-MM-dd}.error.%i.error</fileNamePattern>
+      <fileNamePattern>${application.home:-.}/logs/${LOG_FILENAME}.%d{yyyy-MM-dd}.error.%i.error</fileNamePattern>
       <totalSizeCap>1GB</totalSizeCap>
       <maxHistory>30</maxHistory>
       <maxFileSize>100MB</maxFileSize>
