@@ -57,7 +57,8 @@ dockerCommands := dockerCommands.value.flatMap {
 dockerEntrypoint := Seq("bin/omnie-imageservice", "-Dplay.crypto.secret=asdasdasdAvj&fvn8Tf", "-Dconfig.file=conf/application-docker.conf", "-DmongoHost=172.17.0.1")
 maintainer := "Alexander Balyshyn"
 dockerExposedPorts in Docker := Seq(9000, 9443)
-dockerExposedVolumes in Docker := Seq()
+dockerExposedVolumes := Seq("/opt/docker/logs")
+defaultLinuxInstallLocation in Docker := "/opt/docker"
 
 
 
