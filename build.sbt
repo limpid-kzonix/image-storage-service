@@ -50,7 +50,7 @@ fork in stage := false
 dockerBaseImage := "openjdk:8-jre-alpine"
 packageName in Docker := "image-service-old"
 dockerCommands := dockerCommands.value.flatMap {
-	case cmd@Cmd("FROM", _) => List(cmd, Cmd("RUN", "apk update && apk add bash"), Cmd("mkdir", "/opt/docker/logs"))
+	case cmd@Cmd("FROM", _) => List(cmd, Cmd("RUN", "apk update && apk add bash"), Cmd("RUN", "mkdir -p /opt/docker/logs"))
 	case other => List(other)
 }
 
