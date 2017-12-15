@@ -82,7 +82,7 @@
         <class>com.omnie.model.mongo.entities.ImageSource</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <property name="kundera.nodes" value="${mongoHost}"/>
+            <property name="kundera.nodes" value="172.17.0.1"/>
             <property name="kundera.port" value="27017"/>
             <property name="kundera.keyspace" value="play-db"/>
             <property name="kundera.dialect" value="mongodb"/>
