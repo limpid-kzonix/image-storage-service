@@ -51,29 +51,29 @@
   </appender>
 
 
-  <logger name="application" level="warn">
+  <logger name="application" level="INFO">
     <appender-ref ref="ASYNCFILE-ERROR" />
   </logger>
 
-  <logger name="play" level="debug" additivity="false">
+  <logger name="play" level="INFO" additivity="false">
     <appender-ref ref="FILE-LOG" />
   </logger>
 
   <!-- Off these ones as they are annoying, and anyway we manage configuration ourselves -->
-  <logger name="com.avaje.ebean.config.PropertyMapLoader" level="off" />
-  <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="off" />
-  <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="off" />
-  <logger name="com.gargoylesoftware.htmlunit.javascript" level="off" />
+  <logger name="com.avaje.ebean.config.PropertyMapLoader" level="INFO" />
+  <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="INFO" />
+  <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="INFO" />
+  <logger name="com.gargoylesoftware.htmlunit.javascript" level="INFO" />
 
 
 
   <logger name="akka.actor" level="INFO">
-    <appender-ref ref="FILE-ERROR" />
+    <appender-ref ref="ASYNCFILE-ERROR" />
   </logger>
 
   <root level="INFO">
-    <appender-ref ref="ASYNCSTDOUT" />
-    <appender-ref ref="ASYNCSTDOUT" />
+    <appender-ref ref="ASYNCFILE-ERROR" />
+    <appender-ref ref="ASYNCFILE-ERROR" />
   </root>
 
 </configuration>
