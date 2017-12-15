@@ -1,10 +1,11 @@
+import com.typesafe.sbt.packager.docker.Cmd
 import play.sbt.PlayJava
 
 name := """Omnie ImageService"""
 
-version := "1.0-SNAPSHOT"
+version := "1.0"
 
-lazy val root = (project in file( "." )).enablePlugins( PlayJava, PlayAkkaHttpServer, DebianPlugin )
+lazy val root = (project in file( "." )).enablePlugins( PlayJava, PlayAkkaHttpServer, DebianPlugin, DockerPlugin )
 
 scalaVersion := "2.11.8"
 
@@ -28,7 +29,9 @@ libraryDependencies ++= Seq(
 )
 
 updateOptions := updateOptions.value.withCachedResolution( true )
+
 offline := true
+
 aggregate in update := false
 
 routesGenerator := InjectedRoutesGenerator
@@ -40,6 +43,21 @@ javaOptions ++= Seq("-Xmx2G")
 fork in run := false
 
 fork in stage := false
+
+/* Docker Configuration */
+
+
+dockerBaseImage := "openjdk:8-jre-alpine"
+packageName in Docker := "image-service-old"
+dockerCommands := dockerCommands.value.flatMap {
+	case cmd@Cmd("FROM", _) => List(cmd, Cmd("RUN", "apk update && apk add bash"))
+	case other => List(other)
+}
+
+dockerEntrypoint := Seq("bin/omnie-imageservice", "-Dplay.crypto.secret=asdasdasdAvj&fvn8Tf", "-Dconfig.file=conf/application-.conf", "-DmongoHost=172.17.0.1")
+maintainer := "Alexander Balyshyn"
+dockerExposedPorts in Docker := Seq(9000, 9443)
+dockerExposedVolumes in Docker := Seq()
 
 
 

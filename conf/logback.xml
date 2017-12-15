@@ -1,7 +1,7 @@
 <!-- https://www.playframework.com/documentation/latest/SettingsLogger -->
 <configuration>
 
-  <property name="LOG_DIR" value="/var/log/omniecom-image/" />
+  <property name="LOG_DIR" value="${application.home:-.}" />
   <property name="LOG_FILENAME" value="log-data.part" />
   <timestamp key="bySecond" datePattern="yyyyMMdd.HHmmss"/>
 
@@ -15,7 +15,7 @@
 
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>${LOG_DIR}/archived/error/${LOG_FILENAME}.%d{yyyy-MM-dd}.error.%i.error</fileNamePattern>
+      <fileNamePattern>${application.home:-.}/logs/archived/error/${LOG_FILENAME}.%d{yyyy-MM-dd}.error.%i.error</fileNamePattern>
       <totalSizeCap>1GB</totalSizeCap>
       <maxHistory>30</maxHistory>
       <maxFileSize>100MB</maxFileSize>
