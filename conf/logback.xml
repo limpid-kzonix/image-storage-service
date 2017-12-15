@@ -72,8 +72,8 @@
   </logger>
 
   <root level="INFO">
-    <appender-ref ref="FILE-ERROR" />
-    <appender-ref ref="ASYNCFILE-ERROR" />
+    <appender-ref ref="ASYNCSTDOUT" />
+    <appender-ref ref="ASYNCSTDOUT" />
   </root>
 
 </configuration>
